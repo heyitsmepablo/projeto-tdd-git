@@ -1,6 +1,19 @@
 name: tdd-git-app
 
 services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3000
+    volumes:
+      - ./src:/app/src
+    env_file:
+      - ./.env
+    networks:
+      - app
+
   database:
     image: postgres:16
     ports:
@@ -12,6 +25,7 @@ services:
       POSTGRES_PASSWORD: postgres
     networks:
       - app
+  
   pgadmin:
     image: dpage/pgadmin4:latest
     ports:
@@ -24,6 +38,7 @@ services:
       PGADMIN_LISTEN_PORT: 8080
     networks:
       - app
+
 networks:
   app:
     driver: bridge

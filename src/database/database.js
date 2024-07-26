@@ -2,10 +2,12 @@ import pg from 'pg'
 
 const {Client, Pool} = pg
 
+const hostname = process.env["NODE_ENV"] == 'test' ? 'localhost' : process.env["POSTGRES_HOSTNAME"]
+
 const clientConfig = {
     user: process.env["POSTGRES_USER"],
     password:process.env["POSTGRES_PASSWORD"],
-    host:process.env["POSTGRES_HOSTNAME"],
+    host: hostname,
     port:process.env["POSTGRES_PORT"],
     database:process.env["POSTGRES_DATABASE"],
 }
@@ -13,7 +15,7 @@ const clientConfig = {
 const poolConfig = {
     user:process.env["POSTGRES_USER"],
     password:process.env["POSTGRES_PASSWORD"],
-    host:process.env["POSTGRES_HOSTNAME"],
+    host: hostname,
     port:process.env["POSTGRES_PORT"],
     database:process.env["POSTGRESDATABASER"],
 }
